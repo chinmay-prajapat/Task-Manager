@@ -13,11 +13,9 @@ const port = process.env.PORT || 3000
 //   }
 // })
 
-app.use((req, res) => {
-  if (req.method) {
-    res.send("Ooops no operations can be perform at this time")
-  }
-})
+// app.use((req, res) =>
+//   res.status(503).send("Ooops no operations can be perform at this time"),
+// )
 
 app.use(express.json())
 app.use(userRouter)
