@@ -26,11 +26,10 @@ router.get("/tasks", async (req, res) => {
   }
 })
 
-router.get("/tasks/:id", async (req, res) => {
-  const _id = req.params.id
-
+router.get("/tasks/me", auth, async (req, res) => {
   try {
-    const task = await Task.findById(_id)
+    // const task = await Task.findById(req.params.id)
+    const task = await Task.findOne({ _id, owner: req.user._id })
     !task ? res.status(404).send("Task not found") : res.send(task)
   } catch (e) {
     res.status(500).send()

@@ -53,6 +53,12 @@ const userSchema = new mongoose.Schema({
   ],
 })
 
+userSchema.virtual("tasks", {
+  ref: "Task",
+  localField: "_id",
+  foreignField: "owner",
+})
+
 //deleting password and tokens so that users can not access it on frontend
 
 userSchema.methods.toJSON = function () {
