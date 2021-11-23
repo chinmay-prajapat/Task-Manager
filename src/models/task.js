@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const bycrypt = require("bcryptjs")
+
 const taskSchema = new mongoose.Schema({
   description: {
     type: String,
@@ -10,6 +10,10 @@ const taskSchema = new mongoose.Schema({
     type: Boolean,
 
     default: false,
+  },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
   },
 })
 
