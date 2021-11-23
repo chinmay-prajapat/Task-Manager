@@ -55,7 +55,7 @@ const userSchema = new mongoose.Schema({
 
 //deleting password and tokens so that users can not access it on frontend
 
-userSchema.methods.getPublicProfile = function () {
+userSchema.methods.toJSON = function () {
   const user = this
   const userObject = user.toObject()
   delete userObject.password
