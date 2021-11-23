@@ -102,6 +102,9 @@ userSchema.pre("save", async function (next) {
   }
   next()
 })
+
+//Delete user tasks when user is removed
+
 const User = mongoose.model("User", userSchema)
 
 module.exports = User
