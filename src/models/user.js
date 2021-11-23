@@ -53,6 +53,18 @@ const userSchema = new mongoose.Schema({
   ],
 })
 
+//deleting password and tokens so that users can not access it on frontend
+
+userSchema.methods.getPublicProfile = function () {
+  const user = this
+  const userObject = user.toObject()
+  delete userObject.password
+  delete userObject.tokens
+  return userObject
+}
+
+//Generating tokens
+
 userSchema.methods.generateAuthToken = async function () {
   const user = this
   const token = jwt.sign({ _id: user._id.toString() }, "thisismynewcourse")
@@ -60,6 +72,8 @@ userSchema.methods.generateAuthToken = async function () {
   await user.save()
   return token
 }
+
+//Login by matching hash password
 
 userSchema.statics.findByCredentials = async (email, password) => {
   const user = await User.findOne({ email })
