@@ -25,6 +25,10 @@ const upload = multer({
     fileSize: 1000000,
   },
   fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(doc|docx)$/)) {
+      return cb(new Error("Please upload a word doc"))
+    }
+    cb(undefined, true)
     // cb(new Error("File must be a PDF"))
     // cb(undefine, true)
     // cb(undefined, false)
